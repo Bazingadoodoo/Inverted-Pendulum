@@ -1,4 +1,4 @@
-  // Rotary Encoder Inputs
+// Rotary Encoder Inputs
 #define CLK 12
 #define DT 13
 #define SW 11
@@ -50,7 +50,7 @@ void loop() {
   }
 
   // Remember last CLK state
-  lastStateCLK = currentStateCLK;
+  lastStateCLK = currentStateCLK;`
 
   // Read the button state
   int btnState = digitalRead(SW);
