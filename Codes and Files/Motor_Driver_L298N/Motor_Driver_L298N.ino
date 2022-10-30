@@ -1,11 +1,11 @@
 // Motor A connections
-int enA = 9;
-int in1 = 8;
-int in2 = 7;
+int enA = 9;    // purple
+int in1 = 8;    // blue
+int in2 = 7;    // green
 // Motor B connections
-int enB = 3;
-int in3 = 5;
-int in4 = 4;
+int enB = 3;    // gray
+int in3 = 4;    // white 
+int in4 = 5;    // black
 
 void setup() {
   // Set all the motor control pins to outputs
@@ -72,6 +72,7 @@ void speedControl() {
     analogWrite(enB, i);
     delay(20);
   }
+
   
   // Decelerate from maximum speed to zero
   for (int i = 255; i >= 0; --i) {
@@ -86,14 +87,3 @@ void speedControl() {
   digitalWrite(in3, LOW);
   digitalWrite(in4, LOW);
 }
-Code Explanation:
-The Arduino code is fairly simple. It does not require any libraries to work. The sketch starts by declaring the Arduino pins that are connected to the L298N’s control pins.
-
-// Motor A connections
-int enA = 9;
-int in1 = 8;
-int in2 = 7;
-// Motor B connections
-int enB = 3;
-int in3 = 5;
-int in4 = 4;

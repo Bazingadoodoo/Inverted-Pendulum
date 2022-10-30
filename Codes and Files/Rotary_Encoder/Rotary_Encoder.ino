@@ -1,7 +1,7 @@
-// Rotary Encoder Inputs
-#define CLK 11
-#define DT 12
-#define SW 13
+  // Rotary Encoder Inputs
+#define CLK 12
+#define DT 13
+#define SW 11
 
 int counter = 0;
 int currentStateCLK;
@@ -69,4 +69,5 @@ void loop() {
 
   // Put in a slight delay to help debounce the reading
   delay(1);
+ 
 }
