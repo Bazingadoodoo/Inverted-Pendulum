@@ -101,12 +101,12 @@ void loop()
     digitalWrite(in4, LOW);
   }
 
-  /*
+  
   myPID.Compute();
   motorSpeed = Output;
   analogWrite(enA, motorSpeed);
   analogWrite(enB, motorSpeed);
-  */
+  
 
   delay(1);
 }
