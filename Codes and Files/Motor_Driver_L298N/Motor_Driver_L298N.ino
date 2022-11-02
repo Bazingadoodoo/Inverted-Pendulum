@@ -43,7 +43,7 @@ void directionControl() {
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
   delay(2000);
-  
+ 
   // Now change motor directions
   digitalWrite(in1, LOW);
   digitalWrite(in2, HIGH);

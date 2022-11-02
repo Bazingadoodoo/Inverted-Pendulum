@@ -1,4 +1,4 @@
-#include<PID_v1.h>
+#include <PID_v1.h>
 
 // Rotary Encoder Inputs
 #define CLK 12  // yellow
@@ -20,10 +20,10 @@ int lastStateCLK;
 String currentDir ="";
 
 int motorSpeed = 0;
-double Input = 0;
-double Output = 0;
-double Setpoint = 0;
-double Kp = 0.01, Ki = 30, Kd = 0.03;
+double Input = 0.0;
+double Output = 255.0;
+double Setpoint = 0.0;
+double Kp = 1.0, Ki = 1.0, Kd = 1.0;
 
 PID myPID(&Input, &Output, &Setpoint, Kp, Ki, Kd, DIRECT);
 
@@ -58,35 +58,32 @@ void setup()
 
 void loop()
 {
-  // Read the current state of CLK
   currentStateCLK = digitalRead(CLK);
 
-  // If last and current state of CLK are different, then pulse occurred
-  // React to only 1 state change to avoid double count
   if (currentStateCLK != lastStateCLK  && currentStateCLK == 1){
-
-    // If the DT state is different than the CLK state then
-    // the encoder is rotating CCW so decrement
     if (digitalRead(DT) != currentStateCLK) {
       counter ++;
       currentDir ="CW";
     } 
     else {
-      // Encoder is rotating CW so increment
       counter --;
       currentDir ="CCW";
     }
-  
-    Serial.print("Counter:");
-    Serial.println(counter);
-    Serial.print("Speed:");
+    
+    Input = counter;
+
+    /*
+    Serial.print("Input: "); 
+    Serial.println(Input);
+    Serial.print("Output: ");
+    Serial.println(Output); 
+    Serial.print("motorSpeed: ");
     Serial.println(motorSpeed); 
+    */
   }
 
-  // Remember last CLK state
   lastStateCLK = currentStateCLK;
-  
-  Input = counter;
+  myPID.Compute();
   
   if (counter > 0){
     digitalWrite(in1, LOW);
@@ -101,12 +98,21 @@ void loop()
     digitalWrite(in4, LOW);
   }
 
-  
-  myPID.Compute();
-  motorSpeed = Output;
+  motorSpeed = abs(Output - 255);
+   
   analogWrite(enA, motorSpeed);
   analogWrite(enB, motorSpeed);
-  
 
+  Serial.print(Input);
+  Serial.print(" ");
+  Serial.println(Output); 
+  //Serial.println(motorSpeed); 
+
+/*
+  Serial.print("counter: "); 
+  Serial.println(counter);
+  Serial.print("Output: ");
+  Serial.println(Output); 
+*/  
   delay(1);
 }

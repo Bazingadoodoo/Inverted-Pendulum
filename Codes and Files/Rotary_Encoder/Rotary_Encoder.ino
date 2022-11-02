@@ -50,7 +50,7 @@ void loop() {
   }
 
   // Remember last CLK state
-  lastStateCLK = currentStateCLK;`
+  lastStateCLK = currentStateCLK;
 
   // Read the button state
   int btnState = digitalRead(SW);
